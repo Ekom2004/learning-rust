@@ -15,3 +15,9 @@ Thumbs.db
 *.exe
 lesson5
 myown
+
+# Private startup docs
+memory_layer_startup.md
+mx8_dataloader_architecture.md
+mx8_project_ideas.md
+mx8_video_stories.md
