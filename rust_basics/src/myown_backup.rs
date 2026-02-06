@@ -25,39 +25,17 @@ enum Status {
     Inactive,
     Pending,
 }
-// this is me using result in a function
-fn addition(a :i32 , b:i32)-> Result<i32,String>{
-    if a < 0 || b < 0 {
-        Err(String::from("negative number"))
 
-    }else{
-        Ok(a+b)
-    }
-}
-
-// Main MUST return Result to use `?` inside it
-fn main() -> Result<(), String> {
-
-    // Let's force an error!
-    // addition returns Err("negative number")
-    // The ? operator sees the Err and returns it immediately
-    let sum = addition(-5, 20)?; 
-    println!("10 + 20 = {}", sum); // This line will NEVER run
-
-    // Try uncommenting this to see it crash nicely:
-    // addition(-5, 10)?;
+fn main(){
 
 
     // ============================================
     // RESULT = Ok(value) OR Err(error)
     // Used for operations that might fail
     // ============================================
-
-    // this is result it is used for immediate error handling it uses
-    // type and error  
     let my_goodday: Result<String, String> = Ok(String::from("having a good day"));
     let my_badday: Result<String, String> = Err(String::from("having a bad day"));
-     //this is how we match on results we use ok and err to match on the result
+
     match my_goodday {
         Ok(goodday) => println!("{}", goodday),
         Err(badday) => println!("{}", badday),
@@ -67,7 +45,6 @@ fn main() -> Result<(), String> {
         Ok(goodday) => println!("{}", goodday),
         Err(badday) => println!("Error: {}", badday),
     }
-
 
     let mut os_version: Option<String> = Some(String::from("mac os 19"));
 
@@ -177,7 +154,6 @@ fn main() -> Result<(), String> {
         Status::Inactive => println!("Status: Inactive"),
         Status::Pending => println!("Status: Pending..."),
     }
-    Ok(())
 }
 
 // Function that BORROWS (doesn't take ownership)
