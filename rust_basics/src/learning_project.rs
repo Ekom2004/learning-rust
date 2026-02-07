@@ -33,20 +33,50 @@ fn load_task()-> Result<String,io::Error>{
 fn save_student(student: &Student)-> Result<(),io::Error>{
     let content = format!("Name:{}\nAge:{}\nis_active{}",student.name,student.age,student.is_active);
     fs::write("student.txt",content)?;
+    // we use OK(()) to return no value the () returns nothing just success
     Ok(())
+}
+
+// so this is how we implement a trait in rust we use impl then followed by the trait name
+// 
+pub trait Summary{
+    fn summarize(&self)-> String;
+
+    fn notify(&self){
+        println!("an email has been sent: {}",self.summarize());
+    }
+    
+}
+struct Email{
+    from:String,
+    subject:String,
+}
+// so this is how we use traits with structs and functions we use impl the trait name than the struct name
+impl Summary for Email{
+    fn summarize(&self)-> String{
+        format!("from:{},subject:{}",self.from,self.subject)
+    }
+
 }
 
 
 // Main must return Result to use `?`
 // so we have to use box<dyn std::error ::Error> to return the inbuilt error from the function we cant just mix error types 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+    let email = Email{
+       from: String::from("ekom otu"),
+       subject:String::from("learning rust"
+ )
+    };
+    email.notify();
  
     // Call Student::create_student (capital 'S')
     // create_student takes (String, u8)
     let student1 = Student::create_student(String::from("john"), 25)?;
     
     println!("Created student: {}", student1.name);
-    
+
     save_student(&student1)?;
 
     match load_task(){
